@@ -223,7 +223,7 @@ int main()
 	cin.tie(0);
 	
 	for(int i = 0; i < 30; i++){ display[30][i] = 1; display[i][30] = 1; display[0][i] = 1; display[i][0] = 1;} //creates frame
-
+	 display[30][24] = 0;   //get your snake out of the frame
 	create_snake(12);
 
 	run_snake();
