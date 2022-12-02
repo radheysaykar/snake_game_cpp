@@ -1,20 +1,15 @@
 /*
-
 zoom out 4 times on terminals before playing 
-
 to play enter these lines:
 $ g++ -std=c++11 -pthread a.cpp -oa
 $ ./a
-
 and hit enter
-
 play on num-pad with num-lock on 
 8 + enter:  up
 2 + enter: down
 6 + enter: right
 4 + enter: left
 Ctrl + c: terminate
-
 */
 
 #include <bits/stdc++.h>
@@ -28,7 +23,7 @@ using namespace std;
 
 condition_variable cv;
 
-int direction=2;
+char direction='d';
 
 void read_value(){
 	cin>> direction;
@@ -36,30 +31,30 @@ void read_value(){
 }  
 
 bool display[num][num];
-int snake[100][2], snake_head, snake_tail, frogs[][2]={{13,4},{12,3},{8,2},{21,4},{0,0}}, frog_num=0, tot_frog_num = 5; // add more frogs
+int snake[300][2], snake_head, snake_tail, frogs[][2]={{13,4},{12,3},{8,2},{21,4},{0,0}}, frog_num=0, tot_frog_num = 5; // add more frogs
 
 void pause_execution(double seconds){
 	time_t start = time(0);
 	while(difftime(time(0), start) < seconds) ;
 }
 
-void line(){
-	int n=45, x=2,  y=1, s=6, s1=6 , x1=2, y1=1, ss=15,s2=15,x2=2, y2=1, sss=20, s3=20;
-	while(n--)
-	{
-	 display[x][y]=1;
-	y++;
-	if(s==0) s=s1;
-	else 
-	{
-	x++;
-	s--;
-	}
-	 display[x1][y1]=1;
-	y1++;
-	x1++;
-	}
-}
+// void line(){
+// 	int n=45, x=2,  y=1, s=6, s1=6 , x1=2, y1=1, ss=15,s2=15,x2=2, y2=1, sss=20, s3=20;
+// 	while(n--)
+// 	{
+// 	 display[x][y]=1;
+// 	y++;
+// 	if(s==0) s=s1;
+// 	else 
+// 	{
+// 	x++;
+// 	s--;
+// 	}
+// 	 display[x1][y1]=1;
+// 	y1++;
+// 	x1++;
+// 	}
+// }
 
 void circle(int xcenter, int ycenter, int r, bool v){
 	int x = 0, y = r, p = 1 - r;
@@ -171,25 +166,28 @@ void run_snake(){
 		thread th(read_value);
 		mutex mtx;
 		unique_lock<mutex> lck(mtx);
-		while(cv.wait_for(lck, chrono::seconds(2)) == cv_status::timeout){
+		while(cv.wait_for(lck, chrono::milliseconds(200)) == cv_status::timeout){
 			snake_head++;
 			switch (direction){
-				case 8:
+				case 'e':
 					snake[snake_head][0] = snake[snake_head-1][0]-1;
 					snake[snake_head][1] = snake[snake_head-1][1]; 
 					break;
-				case 6:
+				case 'f':
 					snake[snake_head][0] = snake[snake_head-1][0];
 					snake[snake_head][1] = snake[snake_head-1][1]+1; 
 					break;
-				case 2:
+				case 'd':
 					snake[snake_head][0] = snake[snake_head-1][0]+1;
 					snake[snake_head][1] = snake[snake_head-1][1]; 
 					break;
-				case 4:
+				case 's':
 					snake[snake_head][0] = snake[snake_head-1][0];
 					snake[snake_head][1] = snake[snake_head-1][1]-1; 
 					break;
+                default:
+                    snake[snake_head][0] = snake[snake_head-1][0]+1;
+					snake[snake_head][1] = snake[snake_head-1][1];
 			}
 			
 			 
