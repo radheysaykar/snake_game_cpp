@@ -89,7 +89,7 @@ void circle(int xcenter, int ycenter, int r, bool v){
 void Display(){
 	for(int i=0; i<num; i++)
 	{
-		for(int j=0; j<num; j++) cout<<((display[i][j])?'@':' ')<<' ';
+		for(int j=0; j<num; j++) cout<<((display[i][j])?' ':'@')<<' ';
 		cout<<"\n";
 	}
 }
