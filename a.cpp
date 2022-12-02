@@ -200,6 +200,7 @@ void run_snake(){
 			 	int x1 = snake[snake_head][0], y1= snake[snake_head][1], i;
 			 	
 			 	if(x1 == frogs[frog_num-1][0] && y1 == frogs[frog_num-1][1]){ 
+					while(display[frogs[frog_num][0]][frogs[frog_num][1]])frog_num++; 
 			 		display[frogs[frog_num][0]][frogs[frog_num++][1]] = 1; //frog eaten and next frog created
 			 		if(frog_num==tot_frog_num){ 
 			 			play_waves();
