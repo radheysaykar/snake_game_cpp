@@ -9,10 +9,10 @@ $ ./a
 and hit enter
 
 play on num-pad with num-lock on 
-w:  up
-s: down
-d: right
-a: left
+w + enter:  up
+s + enter: down
+d + enter: right
+a + enter: left
 Ctrl + c: terminate
 */
 
