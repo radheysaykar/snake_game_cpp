@@ -8,9 +8,7 @@ $ g++ -std=c++11 -pthread a.cpp -oa
 
 $ ./a
 
-and hit enter
-
-play on num-pad with num-lock on 
+controls:
 
 w + enter:  up
 
